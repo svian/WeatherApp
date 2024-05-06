@@ -1,7 +1,9 @@
+import { REACT_APP_BASE_URL, REACT_APP_API_KEY } from "@env";
 export class FetchData {
   constructor(location) {
     this.location = location;
-    this.apiKey = process.env.REACT_APP_API_KEY;
+    this.postUrl = REACT_APP_BASE_URL;
+    this.apiKey = REACT_APP_API_KEY;
     this.locationData = this.location !== "" && this.fetchLocation();
     this.lat = "";
     this.lon = "";
@@ -46,10 +48,9 @@ export class FetchData {
   }
 
   fetchLocation() {
-    const postUrl = process.env.REACT_APP_BASE_URL;
-    const url = `${postUrl}q=${this.location}&limit=5&appid=${this.apiKey}`;
+    const url = `${this.postUrl}geo/1.0/direct?q=${this.location}&limit=5&appid=${this.apiKey}`;
 
-    // console.log(url);
+    console.log(url);
 
     fetch(url)
       .then((response) => response.json())
@@ -63,7 +64,7 @@ export class FetchData {
   }
 
   fetchWeather() {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${this.lat}&lon=${this.lon}&appid=${this.apiKey}&units=imperial`;
+    const url = `${this.postUrl}data/2.5/weather?lat=${this.lat}&lon=${this.lon}&appid=${this.apiKey}&units=imperial`;
 
     console.log(url);
     fetch(url)

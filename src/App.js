@@ -1,38 +1,33 @@
-import { StyleSheet, View } from "react-native";
-import { useState } from "react";
-import * as Font from "expo-font";
-import Main from "./Main";
-
-const fetchFonts = () => {
-  return Font.loadAsync({
-    "Jomhuria-Regular": require("../assets/Jomhuria-Regular.ttf"),
-  });
-};
+import { KeyboardAvoidingView, ScrollView } from "react-native";
+import { useCallback } from "react";
+import { useFonts } from "expo-font";
+import Main from "./PageLayout";
+import { AutocompleteDropdownContextProvider } from "react-native-autocomplete-dropdown";
 
 export default function App() {
-  const [dataLoaded, setDataLoaded] = useState(false);
+  const [fontsLoaded, fontError] = useFonts({
+    "Jomhuria-Regular": require("../assets/Jomhuria-Regular.ttf"),
+  });
 
-  if (!dataLoaded) {
-    fetchFonts();
-    setDataLoaded(true);
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
   }
 
   return (
-    <>
-      {dataLoaded && (
-        <View style={styles.container}>
-          <Main />
-        </View>
+    <AutocompleteDropdownContextProvider>
+      {fontsLoaded && (
+        <KeyboardAvoidingView enabled={false}>
+          <ScrollView>
+            <Main />
+          </ScrollView>
+        </KeyboardAvoidingView>
       )}
-    </>
+    </AutocompleteDropdownContextProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    fontFamily: "Jomhuria-Regular",
-    backgroundColor: "#D9D9D9",
-    width: "100%",
-    alignItems: "center",
-  },
-});

@@ -1,7 +1,7 @@
 import { KeyboardAvoidingView, ScrollView } from "react-native";
 import { useCallback } from "react";
 import { useFonts } from "expo-font";
-import Main from "./PageLayout";
+import MainPage from "./MainPage";
 import { AutocompleteDropdownContextProvider } from "react-native-autocomplete-dropdown";
 
 export default function App() {
@@ -24,7 +24,7 @@ export default function App() {
       {fontsLoaded && (
         <KeyboardAvoidingView enabled={false}>
           <ScrollView>
-            <Main />
+            <MainPage />
           </ScrollView>
         </KeyboardAvoidingView>
       )}

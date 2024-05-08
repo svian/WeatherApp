@@ -2,14 +2,14 @@ import { REACT_APP_BASE_URL, REACT_APP_API_KEY } from "@env";
 const API_KEY = REACT_APP_API_KEY;
 const POST_URL = REACT_APP_BASE_URL;
 export class FetchData {
-  constructor(coords, name) {
-    this.location = name;
-    this.locationData = this.getWeatherValues(coords);
+  constructor(coords) {
     this.lat = "";
     this.lon = "";
     this.type = "";
     this.temp = "";
     this.time = "";
+
+    this.getWeatherValues(coords);
   }
 
   getWeatherValues(coords) {
@@ -19,9 +19,9 @@ export class FetchData {
 
     this.fetchWeather();
 
-    return (
-      "Weather in " + this.location + " is " + this.temp + " and " + this.type
-    );
+    // return (
+    //   "Weather in " + this.location + " is " + this.temp + " and " + this.type
+    // );
   }
 
   setTypeandTemp(n_type, n_temp, n_unix, n_sunrise, n_sunset) {
@@ -38,6 +38,8 @@ export class FetchData {
     }
     this.type = n_type;
     this.temp = n_temp;
+
+    console.log("Weather is " + this.temp + " and " + this.type);
   }
 
   fetchWeather() {
@@ -47,7 +49,7 @@ export class FetchData {
       .then((response) => response.json())
       .then((data) => {
         this.setTypeandTemp(
-          data.weather[0].main,
+          data.weather[0].description,
           `${Math.round(data.main.temp)}°F`,
           data.dt,
           data.sys.sunrise,

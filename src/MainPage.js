@@ -7,13 +7,13 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { useEffect, useState } from "react";
-import { FetchData } from "./FetchData.js";
-import { VisualData } from "./VisualData.js";
-import Page3 from "./ResultsDisplay.js";
+import { FetchData } from "./classes/FetchData.js";
+import { VisualData } from "./classes/VisualData.js";
+import WeatherPage from "./WeatherPage.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SearchAutoComplete } from "./SearchBar.js";
 
-export default function Main() {
+export default function MainPage() {
   const [dataLoaded, setDataLoaded] = useState(true);
   const [weather, setWeather] = useState(typeof FetchData);
   const [visuals, setVisuals] = useState(typeof VisualData);
@@ -36,8 +36,14 @@ export default function Main() {
 
   const getData = async () => {
     try {
+      let t_currentLocation;
       const jsonValue = await AsyncStorage.getItem("location");
-      const t_currentLocation = JSON.parse(jsonValue);
+      if (jsonValue !== null) {
+        t_currentLocation = JSON.parse(jsonValue);
+      } else {
+        t_currentLocation = currentLocation;
+      }
+
       setCurrentLocation(t_currentLocation);
       callFetchData(t_currentLocation.coords, t_currentLocation.name);
     } catch (e) {
@@ -73,17 +79,6 @@ export default function Main() {
     }
   }
 
-  function getViewStyle(color) {
-    return {
-      fontFamily: "Jomhuria-Regular",
-      backgroundColor: color,
-      flexDirection: "column",
-      flex: 1,
-      padding: 20,
-      width: "100%",
-    };
-  }
-
   useEffect(() => {
     if (!didLoadSave) {
       console.log("call");
@@ -93,39 +88,50 @@ export default function Main() {
   }, [didLoadSave]);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <>
-        <View style={getViewStyle(visuals.backgroundColor)}>
-          <View style={styles.search}>
-            <View style={styles.searchConatiner}>
-              <SearchAutoComplete
-                saved={currentLocation.name}
-                onSetSelectedItem={(coords, name) =>
-                  onPressSearch(coords, name)
-                }
-              />
-            </View>
-          </View>
-          <View style={styles.visuals}>
-            <Page3 temp={weather.temp} visuals={visuals} />
-          </View>
+    <View
+      style={[
+        {
+          backgroundColor: visuals.theme ? visuals.theme.background : "#D9D9D9",
+        },
+        styles.view,
+      ]}
+    >
+      <View style={styles.search}>
+        <View style={styles.searchConatiner}>
+          <SearchAutoComplete
+            saved={currentLocation.name}
+            onSetSelectedItem={(coords, name) => {
+              coords && name && onPressSearch(coords, name);
+            }}
+          />
         </View>
-        <StatusBar />
-        {!dataLoaded && (
-          <View style={styles.loading}>
-            <ActivityIndicator size="large" />
-          </View>
-        )}
-      </>
-    </TouchableWithoutFeedback>
+      </View>
+      <View style={styles.visuals}>
+        <WeatherPage temp={weather.temp} visuals={visuals} />
+      </View>
+      <StatusBar />
+      {!dataLoaded && (
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" />
+        </View>
+      )}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  visuals: {
-    flex: 4,
+  // visuals: {
+  //   flex: 4,
+  //   width: "100%",
+  //   flexDirection: "row",
+  // },
+  view: {
+    fontFamily: "Jomhuria-Regular",
+    flexDirection: "column",
+    flex: 1,
+    padding: 20,
     width: "100%",
-    flexDirection: "row",
+    height: "100%",
   },
   search: {
     flex: 1,

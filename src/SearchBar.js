@@ -3,7 +3,7 @@ import { Dimensions, Text, View, Platform } from "react-native";
 import { AutocompleteDropdown } from "react-native-autocomplete-dropdown";
 
 import { REACT_APP_API_KEY, REACT_APP_BASE_URL } from "@env";
-import { States } from "./StateAbbr";
+import { States } from "./classes/StateAbbr";
 
 export const SearchAutoComplete = memo(function SearchAutoComplete(props) {
   const [loading, setLoading] = useState(false);

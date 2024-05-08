@@ -1,22 +1,12 @@
 import { View, Image, StyleSheet, Text } from "react-native";
 import InsetShadow from "react-native-inset-shadow";
 
-export default function Page3(props) {
-  getBoxStyle = function (myColor) {
-    return {
-      width: "100%",
-      borderRadius: 20,
-      paddingLeft: 25,
-      paddingRight: 20,
-      backgroundColor: myColor,
-    };
-  };
-
+export default function WeatherPage(props) {
   return (
     <>
-      {props.temp !== undefined && props.visuals.img && (
+      {props.temp !== undefined && props.visuals.theme && (
         <View style={styles.container}>
-          <Image style={styles.image} source={props.visuals.img} />
+          <Image style={styles.image} source={props.visuals.theme.img} />
           <View>
             <Text style={styles.title}>{props.visuals.type}</Text>
           </View>
@@ -30,10 +20,14 @@ export default function Page3(props) {
               marginBottom: "20%",
             }}
           >
-            <View style={getBoxStyle(props.visuals.boxColor)}>
-              <Text style={styles.boxText}>{props.visuals.quote}</Text>
+            <View
+              style={[{ backgroundColor: props.visuals.theme.box }, styles.box]}
+            >
+              <Text style={styles.boxText}>{props.visuals.theme.quote}</Text>
               <View>
-                <Text style={styles.boxText}>{props.visuals.quoteSrc}</Text>
+                <Text style={styles.boxText}>
+                  {props.visuals.theme.quoteSrc}
+                </Text>
               </View>
             </View>
           </InsetShadow>
@@ -47,11 +41,12 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
   },
   image: {
-    marginTop: "10%",
-    height: 220,
-    width: 220,
+    marginTop: "15%",
+    height: "45%",
+    width: "100%",
   },
   title: {
     fontFamily: "Jomhuria-Regular",
@@ -76,5 +71,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingTop: 15,
     paddingBottom: 15,
+  },
+  box: {
+    borderRadius: 20,
+    paddingLeft: 25,
+    paddingRight: 20,
   },
 });

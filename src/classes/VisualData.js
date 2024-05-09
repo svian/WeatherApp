@@ -43,7 +43,7 @@ export class VisualData {
   setCategory() {
     switch (this.description) {
       case "clear sky":
-        this.category = "Clear";
+        this.category = "Clear Skies";
         break;
       case "few clouds":
       case "scattered clouds":

@@ -1,11 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  View,
-  ActivityIndicator,
-  Keyboard,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { useEffect, useState } from "react";
 import { FetchData } from "./classes/FetchData.js";
 import { VisualData } from "./classes/VisualData.js";
@@ -96,17 +90,15 @@ export default function MainPage() {
         styles.view,
       ]}
     >
-      <View style={styles.search}>
-        <View style={styles.searchConatiner}>
-          <SearchAutoComplete
-            saved={currentLocation.name}
-            onSetSelectedItem={(coords, name) => {
-              coords && name && onPressSearch(coords, name);
-            }}
-          />
-        </View>
+      <View style={styles.searchbar}>
+        <SearchAutoComplete
+          saved={currentLocation.name}
+          onSetSelectedItem={(coords, name) => {
+            coords && name && onPressSearch(coords, name);
+          }}
+        />
       </View>
-      <View style={styles.visuals}>
+      <View style={styles.display}>
         <WeatherPage temp={weather.temp} visuals={visuals} />
       </View>
       <StatusBar />
@@ -120,24 +112,16 @@ export default function MainPage() {
 }
 
 const styles = StyleSheet.create({
-  // visuals: {
-  //   flex: 4,
-  //   width: "100%",
-  //   flexDirection: "row",
-  // },
   view: {
-    fontFamily: "Jomhuria-Regular",
-    flexDirection: "column",
-    flex: 1,
-    padding: 20,
     width: "100%",
     height: "100%",
+    paddingHorizontal: 20,
   },
-  search: {
+  searchbar: {
     flex: 1,
   },
-  searchConatiner: {
-    flexDirection: "row",
+  display: {
+    flex: 4,
   },
   loading: {
     position: "absolute",
@@ -148,10 +132,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "rgba(0,0,0,0.2)",
-  },
-  loaded: {
-    height: "100%",
-    justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0)",
   },
 });

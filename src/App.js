@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, ScrollView } from "react-native";
+import { View, Dimensions } from "react-native";
 import { useCallback } from "react";
 import { useFonts } from "expo-font";
 import MainPage from "./MainPage";
@@ -8,6 +8,7 @@ export default function App() {
   const [fontsLoaded, fontError] = useFonts({
     "Jomhuria-Regular": require("../assets/Jomhuria-Regular.ttf"),
   });
+  const windowHeight = Dimensions.get("window").height + 50;
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded || fontError) {
@@ -22,11 +23,9 @@ export default function App() {
   return (
     <AutocompleteDropdownContextProvider>
       {fontsLoaded && (
-        <KeyboardAvoidingView enabled={false}>
-          <ScrollView>
-            <MainPage />
-          </ScrollView>
-        </KeyboardAvoidingView>
+        <View style={{ minHeight: windowHeight }}>
+          <MainPage />
+        </View>
       )}
     </AutocompleteDropdownContextProvider>
   );

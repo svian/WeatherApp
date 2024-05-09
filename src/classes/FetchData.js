@@ -18,10 +18,6 @@ export class FetchData {
     this.lon = t_coords[1];
 
     this.fetchWeather();
-
-    // return (
-    //   "Weather in " + this.location + " is " + this.temp + " and " + this.type
-    // );
   }
 
   setTypeandTemp(n_type, n_temp, n_unix, n_sunrise, n_sunset) {

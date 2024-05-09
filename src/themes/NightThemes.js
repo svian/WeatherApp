@@ -79,7 +79,7 @@ export const NightSnowy = {
   img: HeavySnowIcon,
 };
 
-export const NightFog = {
+export const NightFogEtc = {
   background: "#4F4E60",
   box: "#323147",
   quote:

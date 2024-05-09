@@ -11,7 +11,7 @@ export default function WeatherPage(props) {
         <View style={styles.container}>
           <Image
             style={{
-              width: "90%",
+              width: "95%",
               height: "40%",
               marginVertical: "-10%",
             }}

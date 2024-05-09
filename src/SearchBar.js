@@ -8,7 +8,6 @@ import { States } from "./classes/StateAbbr";
 export const SearchAutoComplete = memo(function SearchAutoComplete(props) {
   const [loading, setLoading] = useState(false);
   const [suggestionsList, setSuggestionsList] = useState(null);
-  //const [selectedItem, setSelectedItem] = useState(null);
   const dropdownController = useRef(null);
   const apiKey = REACT_APP_API_KEY;
   const baseURL = REACT_APP_BASE_URL;
@@ -22,16 +21,26 @@ export const SearchAutoComplete = memo(function SearchAutoComplete(props) {
       return;
     }
     setLoading(true);
-    const response = await fetch(
-      `${baseURL}geo/1.0/direct?q=${q}&limit=5&appid=${apiKey}`
-    );
-    const test = new States();
+    let response;
+    const state = new States();
+    if (q.includes(", ")) {
+      const str = q.split(", ");
+      str[1] = state.getAbbr(str[1]) !== null ? state.getAbbr(str[1]) : str[1];
+      response = await fetch(
+        `${baseURL}geo/1.0/direct?q=${str[0]},${str[1]}&limit=5&appid=${apiKey}`
+      );
+    } else {
+      response = await fetch(
+        `${baseURL}geo/1.0/direct?q=${q}&limit=5&appid=${apiKey}`
+      );
+    }
+
     const items = await response.json();
     const suggestions = items.map((item) => ({
       id: item.lat + " " + item.lon,
       title:
         item.country === "US"
-          ? item.name + ", " + test.getAbbr(item.state)
+          ? item.name + ", " + state.getAbbr(item.state)
           : item.name + ", " + item.country,
     }));
     setSuggestionsList(suggestions);
@@ -56,8 +65,10 @@ export const SearchAutoComplete = memo(function SearchAutoComplete(props) {
             dropdownController.current = controller;
           }}
           direction={Platform.select({ md: "down" })}
+          initialValue={props.saved}
           dataSet={suggestionsList}
           onChangeText={getSuggestions}
+          clearOnFocus={false}
           onSelectItem={(item) => {
             item && props.onSetSelectedItem(item.id, item.title);
           }}
@@ -67,7 +78,6 @@ export const SearchAutoComplete = memo(function SearchAutoComplete(props) {
           loading={loading}
           useFilter={false} // set false to prevent rerender twice
           textInputProps={{
-            placeholder: props.saved,
             autoCorrect: false,
             autoCapitalize: "none",
             style: {

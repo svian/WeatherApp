@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { FetchData } from "./classes/FetchData.js";
 import { VisualData } from "./classes/VisualData.js";
 import WeatherPage from "./WeatherPage.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SearchAutoComplete } from "./SearchBar.js";
+import * as SplashScreen from "expo-splash-screen";
 
 export default function MainPage() {
   const [dataLoaded, setDataLoaded] = useState(true);
@@ -18,10 +19,15 @@ export default function MainPage() {
     name: "Boston, MA",
   });
 
+  const onLayoutRootView = useCallback(async () => {
+    if (dataLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [dataLoaded]);
+
   const storeData = async (n_location) => {
     try {
       const jsonValue = JSON.stringify(n_location);
-      console.log("storing " + jsonValue);
       await AsyncStorage.setItem("location", jsonValue);
     } catch (e) {
       console.error("Error saving data:", e);
@@ -65,7 +71,6 @@ export default function MainPage() {
   }
 
   function onPressSearch(coords, name) {
-    console.log("Fetching " + name);
     setDataLoaded(false);
     if (name !== "" && coords !== "") {
       setCurrentLocation({ coords: coords, name: name });
@@ -81,18 +86,23 @@ export default function MainPage() {
     }
   }, [didLoadSave]);
 
+  if (!dataLoaded) {
+    return null;
+  }
+
   return (
     <View
       style={[
         {
-          backgroundColor: visuals.theme ? visuals.theme.background : "#D9D9D9",
+          backgroundColor: visuals.theme ? visuals.theme.background : null,
         },
         styles.view,
       ]}
+      onLayout={onLayoutRootView}
     >
       <View style={styles.searchbar}>
         <SearchAutoComplete
-          saved={currentLocation.name}
+          saved={currentLocation.coords}
           onSetSelectedItem={(coords, name) => {
             coords && name && onPressSearch(coords, name);
           }}

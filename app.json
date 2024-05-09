@@ -7,9 +7,9 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icons/ClearIcon_Day.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#CDE9F1"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,18 +20,30 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#CDE9F1"
+      },
+      "package": "com.mauvee.WeatherApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "packagerOpts": {
+      "sourceExts": [ "js", "json", "ts", "tsx", "jsx", "vue"]
+    },
     "plugins": [
-      ["expo-font",
-      {
-        "fonts": ["./assets/Jomhuria-Regular.ttf"]
-      }
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/Jomhuria-Regular.ttf"
+          ]
+        }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "18a9a1f0-c875-4e7a-86e2-1bdebc3c27f6"
+      }
+    }
   }
 }

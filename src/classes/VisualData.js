@@ -27,17 +27,15 @@ export class VisualData {
     this.time = time;
     this.category = "";
     this.theme = {
-      background: "#D9D9D9",
-      box: "#D9D9D9",
+      background: "#CDE9F1",
+      box: "#CDE9F1",
       quote: "",
       quoteSrc: "",
       img: null,
     };
 
     this.setCategory();
-    console.log(this.category);
     this.setVisuals();
-    console.log(this.theme);
   }
 
   setCategory() {

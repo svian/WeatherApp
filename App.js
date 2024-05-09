@@ -1,8 +1,9 @@
 import { View, Dimensions } from "react-native";
 import { useCallback } from "react";
 import { useFonts } from "expo-font";
-import MainPage from "./MainPage";
+import MainPage from "./src/MainPage";
 import { AutocompleteDropdownContextProvider } from "react-native-autocomplete-dropdown";
+import * as SplashScreen from "expo-splash-screen";
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
@@ -23,7 +24,10 @@ export default function App() {
   return (
     <AutocompleteDropdownContextProvider>
       {fontsLoaded && (
-        <View style={{ minHeight: windowHeight }}>
+        <View
+          style={{ minHeight: windowHeight, backgroundColor: "#CDE9F1" }}
+          onLayout={onLayoutRootView}
+        >
           <MainPage />
         </View>
       )}

@@ -1,10 +1,7 @@
-import {View, Image, StyleSheet, Text, Dimensions} from 'react-native';
+import {View, Image, StyleSheet, Text} from 'react-native';
 import InsetShadow from 'react-native-inset-shadow';
 
 export default function WeatherPage(props) {
-  const windowWidth = Dimensions.get('window').width;
-  const windowHeight = Dimensions.get('window').height;
-
   return (
     <>
       {props.temp !== undefined && props.visuals.theme && (
@@ -14,6 +11,7 @@ export default function WeatherPage(props) {
               width: '95%',
               height: '40%',
               marginTop: '-10%',
+              marginBottom: '-10%',
             }}
             source={props.visuals.theme.img}
           />
@@ -29,28 +27,23 @@ export default function WeatherPage(props) {
                 styles.subtitle,
               ]}>{`It's ${props.temp}`}</Text>
           </View>
-          <View style={styles.he}>
-            <InsetShadow
-              containerStyle={{
-                borderRadius: 20,
-                height: 'fit-content',
-              }}>
-              <View
-                style={[
-                  {backgroundColor: props.visuals.theme.box},
-                  styles.box,
-                ]}>
+          <InsetShadow
+            containerStyle={{
+              borderRadius: 20,
+              height: 'fit-content',
+            }}>
+            <View
+              style={[{backgroundColor: props.visuals.theme.box}, styles.box]}>
+              <Text style={[styles.text, styles.boxText]}>
+                {props.visuals.theme.quote}
+              </Text>
+              <View>
                 <Text style={[styles.text, styles.boxText]}>
-                  {props.visuals.theme.quote}
+                  {props.visuals.theme.quoteSrc}
                 </Text>
-                <View>
-                  <Text style={[styles.text, styles.boxText]}>
-                    {props.visuals.theme.quoteSrc}
-                  </Text>
-                </View>
               </View>
-            </InsetShadow>
-          </View>
+            </View>
+          </InsetShadow>
         </View>
       )}
     </>
@@ -77,11 +70,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 40,
-    marginBottom: 20,
-  },
-  he: {
-    justifyContent: 'center',
-    height: '30%',
+    marginBottom: 30,
   },
   boxText: {
     fontSize: 24,
@@ -89,9 +78,6 @@ const styles = StyleSheet.create({
   },
   box: {
     borderRadius: 20,
-    paddingLeft: 25,
-    paddingRight: 20,
-    paddingTop: 20,
-    paddingBottom: 20,
+    padding: 20,
   },
 });

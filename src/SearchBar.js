@@ -64,7 +64,6 @@ export const SearchAutoComplete = memo(function SearchAutoComplete(props) {
             dropdownController.current = controller;
           }}
           direction={Platform.select({md: 'down'})}
-          initialValue={props.saved}
           dataSet={suggestionsList}
           onChangeText={getSuggestions}
           clearOnFocus={false}
@@ -77,6 +76,7 @@ export const SearchAutoComplete = memo(function SearchAutoComplete(props) {
           loading={loading}
           useFilter={false} // set false to prevent rerender twice
           textInputProps={{
+            placeholder: props.saved,
             autoCorrect: false,
             autoCapitalize: 'none',
             style: {

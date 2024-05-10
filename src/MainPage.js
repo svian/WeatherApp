@@ -1,12 +1,10 @@
-//import {StatusBar} from 'expo-status-bar';
 import {StyleSheet, View, ActivityIndicator} from 'react-native';
-import {useEffect, useState, useCallback} from 'react';
+import {useEffect, useState} from 'react';
 import {FetchData} from './classes/FetchData.js';
 import {VisualData} from './classes/VisualData.js';
 import WeatherPage from './WeatherPage.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {SearchAutoComplete} from './SearchBar.js';
-//import * as SplashScreen from "expo-splash-screen";
 
 export default function MainPage() {
   const [dataLoaded, setDataLoaded] = useState(true);
@@ -18,12 +16,6 @@ export default function MainPage() {
     coords: '42.3554334 -71.060511',
     name: 'Boston, MA',
   });
-
-  // const onLayoutRootView = useCallback(async () => {
-  //   if (dataLoaded) {
-  //     await SplashScreen.hideAsync();
-  //   }
-  // }, [dataLoaded]);
 
   const storeData = async n_location => {
     try {
@@ -86,10 +78,6 @@ export default function MainPage() {
     }
   }, [didLoadSave]);
 
-  // if (!dataLoaded) {
-  //   return null;
-  // }
-
   return (
     <View
       style={[
@@ -100,7 +88,7 @@ export default function MainPage() {
       ]}>
       <View style={styles.searchbar}>
         <SearchAutoComplete
-          saved={currentLocation.coords}
+          saved={currentLocation.name}
           onSetSelectedItem={(coords, name) => {
             coords && name && onPressSearch(coords, name);
           }}
@@ -109,7 +97,6 @@ export default function MainPage() {
       <View style={styles.display}>
         <WeatherPage temp={weather.temp} visuals={visuals} />
       </View>
-      {/* <StatusBar /> */}
       {!dataLoaded && (
         <View style={styles.loading}>
           <ActivityIndicator size="large" />
@@ -129,7 +116,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   display: {
-    flex: 4,
+    flex: 8,
   },
   loading: {
     position: 'absolute',

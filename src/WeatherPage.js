@@ -13,7 +13,7 @@ export default function WeatherPage(props) {
             style={{
               width: '95%',
               height: '40%',
-              marginVertical: '-10%',
+              marginTop: '-10%',
             }}
             source={props.visuals.theme.img}
           />
@@ -29,24 +29,28 @@ export default function WeatherPage(props) {
                 styles.subtitle,
               ]}>{`It's ${props.temp}`}</Text>
           </View>
-          <InsetShadow
-            containerStyle={{
-              borderRadius: 20,
-              height: 'fit-content',
-              marginBottom: '20%',
-            }}>
-            <View
-              style={[{backgroundColor: props.visuals.theme.box}, styles.box]}>
-              <Text style={[styles.text, styles.boxText]}>
-                {props.visuals.theme.quote}
-              </Text>
-              <View>
+          <View style={styles.he}>
+            <InsetShadow
+              containerStyle={{
+                borderRadius: 20,
+                height: 'fit-content',
+              }}>
+              <View
+                style={[
+                  {backgroundColor: props.visuals.theme.box},
+                  styles.box,
+                ]}>
                 <Text style={[styles.text, styles.boxText]}>
-                  {props.visuals.theme.quoteSrc}
+                  {props.visuals.theme.quote}
                 </Text>
+                <View>
+                  <Text style={[styles.text, styles.boxText]}>
+                    {props.visuals.theme.quoteSrc}
+                  </Text>
+                </View>
               </View>
-            </View>
-          </InsetShadow>
+            </InsetShadow>
+          </View>
         </View>
       )}
     </>
@@ -68,12 +72,16 @@ const styles = StyleSheet.create({
     textShadowRadius: 15,
   },
   title: {
-    fontSize: 65,
+    fontSize: 75,
     marginBottom: '-10%',
   },
   subtitle: {
     fontSize: 40,
     marginBottom: 20,
+  },
+  he: {
+    justifyContent: 'center',
+    height: '30%',
   },
   boxText: {
     fontSize: 24,
@@ -83,7 +91,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingLeft: 25,
     paddingRight: 20,
-    paddingTop: 15,
-    paddingBottom: 15,
+    paddingTop: 20,
+    paddingBottom: 20,
   },
 });

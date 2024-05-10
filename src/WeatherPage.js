@@ -1,9 +1,9 @@
-import { View, Image, StyleSheet, Text, Dimensions } from "react-native";
-import InsetShadow from "react-native-inset-shadow";
+import {View, Image, StyleSheet, Text, Dimensions} from 'react-native';
+import InsetShadow from 'react-native-inset-shadow';
 
 export default function WeatherPage(props) {
-  const windowWidth = Dimensions.get("window").width;
-  const windowHeight = Dimensions.get("window").height;
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
 
   return (
     <>
@@ -11,9 +11,9 @@ export default function WeatherPage(props) {
         <View style={styles.container}>
           <Image
             style={{
-              width: "95%",
-              height: "40%",
-              marginVertical: "-10%",
+              width: '95%',
+              height: '40%',
+              marginVertical: '-10%',
             }}
             source={props.visuals.theme.img}
           />
@@ -24,19 +24,19 @@ export default function WeatherPage(props) {
           </View>
           <View>
             <Text
-              style={[styles.text, styles.subtitle]}
-            >{`It's ${props.temp}`}</Text>
+              style={[
+                styles.text,
+                styles.subtitle,
+              ]}>{`It's ${props.temp}`}</Text>
           </View>
           <InsetShadow
             containerStyle={{
               borderRadius: 20,
-              height: "fit-content",
-              marginBottom: "20%",
-            }}
-          >
+              height: 'fit-content',
+              marginBottom: '20%',
+            }}>
             <View
-              style={[{ backgroundColor: props.visuals.theme.box }, styles.box]}
-            >
+              style={[{backgroundColor: props.visuals.theme.box}, styles.box]}>
               <Text style={[styles.text, styles.boxText]}>
                 {props.visuals.theme.quote}
               </Text>
@@ -55,21 +55,21 @@ export default function WeatherPage(props) {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
   },
   text: {
-    fontFamily: "Jomhuria-Regular",
-    color: "#ffffff",
+    fontFamily: 'Jomhuria-Regular',
+    color: '#ffffff',
     letterSpacing: 7,
-    textShadowColor: "rgba(0, 0, 0, 0.5)",
-    textShadowOffset: { height: 2 },
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowOffset: {height: 2},
     textShadowRadius: 15,
   },
   title: {
     fontSize: 65,
-    marginBottom: "-10%",
+    marginBottom: '-10%',
   },
   subtitle: {
     fontSize: 40,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   boxText: {
     fontSize: 24,
-    textAlign: "center",
+    textAlign: 'center',
   },
   box: {
     borderRadius: 20,

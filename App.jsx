@@ -8,6 +8,7 @@
 import {StyleSheet, View, Dimensions} from 'react-native';
 import {AutocompleteDropdownContextProvider} from 'react-native-autocomplete-dropdown';
 import React from 'react';
+import MainPage from './src/MainPage';
 
 function App() {
   const windowHeight = Dimensions.get('window').height + 50;
@@ -15,7 +16,9 @@ function App() {
     <AutocompleteDropdownContextProvider>
       <View
         // eslint-disable-next-line react-native/no-inline-styles
-        style={{minHeight: windowHeight, backgroundColor: '#CDE9F1'}}></View>
+        style={{minHeight: windowHeight, backgroundColor: '#CDE9F1'}}>
+          <MainPage />
+        </View>
     </AutocompleteDropdownContextProvider>
   );
 }

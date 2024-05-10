@@ -8,7 +8,7 @@ import {
   DaySnowy,
   DayThunder,
   DayLightSnow,
-} from "../themes/DayThemes";
+} from '../themes/DayThemes';
 import {
   NightClear,
   NightCloudy,
@@ -19,18 +19,18 @@ import {
   NightSnowy,
   NightThunder,
   NightLightSnow,
-} from "../themes/NightThemes";
+} from '../themes/NightThemes';
 
 export class VisualData {
   constructor(time, description) {
     this.description = description;
     this.time = time;
-    this.category = "";
+    this.category = '';
     this.theme = {
-      background: "#CDE9F1",
-      box: "#CDE9F1",
-      quote: "",
-      quoteSrc: "",
+      background: '#CDE9F1',
+      box: '#CDE9F1',
+      quote: '',
+      quoteSrc: '',
       img: null,
     };
 
@@ -40,63 +40,63 @@ export class VisualData {
 
   setCategory() {
     switch (this.description) {
-      case "clear sky":
-        this.category = "Clear Skies";
+      case 'clear sky':
+        this.category = 'Clear Skies';
         break;
-      case "few clouds":
-      case "scattered clouds":
-        this.category = "Few Clouds";
+      case 'few clouds':
+      case 'scattered clouds':
+        this.category = 'Few Clouds';
         break;
-      case "broken clouds":
-      case "overcast clouds":
-        this.category = "Cloudy";
+      case 'broken clouds':
+      case 'overcast clouds':
+        this.category = 'Cloudy';
         break;
-      case "light intensity drizzle":
-      case "drizzle":
-      case "heavy intensity drizzle":
-      case "light intensity drizzle rain":
-      case "drizzle rain":
-      case "heavy intensity drizzle rain":
-      case "shower rain and drizzle":
-      case "heavy shower rain and drizzle":
-      case "shower drizzle":
-      case "light rain":
-      case "light intensity shower rain":
-        this.category = "Light Rain";
+      case 'light intensity drizzle':
+      case 'drizzle':
+      case 'heavy intensity drizzle':
+      case 'light intensity drizzle rain':
+      case 'drizzle rain':
+      case 'heavy intensity drizzle rain':
+      case 'shower rain and drizzle':
+      case 'heavy shower rain and drizzle':
+      case 'shower drizzle':
+      case 'light rain':
+      case 'light intensity shower rain':
+        this.category = 'Light Rain';
         break;
-      case "moderate rain":
-      case "heavy intensity rain":
-      case "very heavy rain":
-      case "extreme rain":
-      case "freezing rain":
-      case "shower rain":
-      case "heavy intensity shower rain":
-      case "ragged shower rain":
-        this.category = "Rainy";
+      case 'moderate rain':
+      case 'heavy intensity rain':
+      case 'very heavy rain':
+      case 'extreme rain':
+      case 'freezing rain':
+      case 'shower rain':
+      case 'heavy intensity shower rain':
+      case 'ragged shower rain':
+        this.category = 'Rainy';
         break;
-      case this.description.includes("thunderstorm"):
-        this.category = "Thunderstorm";
+      case this.description.includes('thunderstorm'):
+        this.category = 'Thunderstorm';
         break;
-      case "light snow":
-      case "snow":
-      case "sleet":
-      case "light shower sleet":
-      case "light rain and snow":
-      case "light shower snow":
-        this.category = "Snowy";
+      case 'light snow':
+      case 'snow':
+      case 'sleet':
+      case 'light shower sleet':
+      case 'light rain and snow':
+      case 'light shower snow':
+        this.category = 'Snowy';
         break;
-      case "heavy snow":
-      case "shower sleet":
-      case "rain and snow":
-      case "shower snow":
-      case "heavy shower snow":
-        this.category = "Heavy Snow";
+      case 'heavy snow':
+      case 'shower sleet':
+      case 'rain and snow':
+      case 'shower snow':
+      case 'heavy shower snow':
+        this.category = 'Heavy Snow';
         break;
-      case "sand/dust whirls":
-        this.category = "Dust";
+      case 'sand/dust whirls':
+        this.category = 'Dust';
         break;
-      case "volcanic ash":
-        this.category = "Ash";
+      case 'volcanic ash':
+        this.category = 'Ash';
         break;
       default:
         this.category =
@@ -106,37 +106,37 @@ export class VisualData {
   }
 
   setVisuals() {
-    if (this.time === "Day") {
+    if (this.time === 'Day') {
       switch (this.category) {
-        case "Clear Skies":
+        case 'Clear Skies':
           this.theme = DayClear;
           break;
 
-        case "Few Clouds":
+        case 'Few Clouds':
           this.theme = DayFewClouds;
           break;
 
-        case "Cloudy":
+        case 'Cloudy':
           this.theme = DayCloudy;
           break;
 
-        case "Light Rain":
+        case 'Light Rain':
           this.theme = DayLightRain;
           break;
 
-        case "Rainy":
+        case 'Rainy':
           this.theme = DayRainy;
           break;
 
-        case "Thunderstorm":
+        case 'Thunderstorm':
           this.theme = DayThunder;
           break;
 
-        case "Snowy":
+        case 'Snowy':
           this.theme = DayLightSnow;
           break;
 
-        case "Heavy Snow":
+        case 'Heavy Snow':
           this.theme = DaySnowy;
           break;
 
@@ -146,35 +146,35 @@ export class VisualData {
       }
     } else {
       switch (this.category) {
-        case "Clear Skies":
+        case 'Clear Skies':
           this.theme = NightClear;
           break;
 
-        case "Few Clouds":
+        case 'Few Clouds':
           this.theme = NightFewClouds;
           break;
 
-        case "Cloudy":
+        case 'Cloudy':
           this.theme = NightCloudy;
           break;
 
-        case "Light Rain":
+        case 'Light Rain':
           this.theme = NightLightRain;
           break;
 
-        case "Rainy":
+        case 'Rainy':
           this.theme = NightRainy;
           break;
 
-        case "Thunderstorm":
+        case 'Thunderstorm':
           this.theme = NightThunder;
           break;
 
-        case "Snowy":
+        case 'Snowy':
           this.theme = NightLightSnow;
           break;
 
-        case "Heavy Snow":
+        case 'Heavy Snow':
           this.theme = NightSnowy;
           break;
 

@@ -1,9 +1,9 @@
-import React, { memo, useCallback, useRef, useState } from "react";
-import { Dimensions, Text, View, Platform } from "react-native";
-import { AutocompleteDropdown } from "react-native-autocomplete-dropdown";
+import React, {memo, useCallback, useRef, useState} from 'react';
+import {Dimensions, Text, View, Platform} from 'react-native';
+import {AutocompleteDropdown} from 'react-native-autocomplete-dropdown';
 
-import { REACT_APP_API_KEY, REACT_APP_BASE_URL } from "@env";
-import { States } from "./classes/StateAbbr";
+import {REACT_APP_API_KEY, REACT_APP_BASE_URL} from '@env';
+import {States} from './classes/StateAbbr';
 
 export const SearchAutoComplete = memo(function SearchAutoComplete(props) {
   const [loading, setLoading] = useState(false);
@@ -14,34 +14,34 @@ export const SearchAutoComplete = memo(function SearchAutoComplete(props) {
 
   const searchRef = useRef(null);
 
-  const getSuggestions = useCallback(async (q) => {
-    console.log("getSuggestions", q);
-    if (typeof q !== "string" || q.length < 3) {
+  const getSuggestions = useCallback(async q => {
+    console.log('getSuggestions', q);
+    if (typeof q !== 'string' || q.length < 3) {
       setSuggestionsList(null);
       return;
     }
     setLoading(true);
     let response;
     const state = new States();
-    if (q.includes(", ")) {
-      const str = q.split(", ");
+    if (q.includes(', ')) {
+      const str = q.split(', ');
       str[1] = state.getAbbr(str[1]) !== null ? state.getAbbr(str[1]) : str[1];
       response = await fetch(
-        `${baseURL}geo/1.0/direct?q=${str[0]},${str[1]}&limit=5&appid=${apiKey}`
+        `${baseURL}geo/1.0/direct?q=${str[0]},${str[1]}&limit=5&appid=${apiKey}`,
       );
     } else {
       response = await fetch(
-        `${baseURL}geo/1.0/direct?q=${q}&limit=5&appid=${apiKey}`
+        `${baseURL}geo/1.0/direct?q=${q}&limit=5&appid=${apiKey}`,
       );
     }
 
     const items = await response.json();
-    const suggestions = items.map((item) => ({
-      id: item.lat + " " + item.lon,
+    const suggestions = items.map(item => ({
+      id: item.lat + ' ' + item.lon,
       title:
-        item.country === "US"
-          ? item.name + ", " + state.getAbbr(item.state)
-          : item.name + ", " + item.country,
+        item.country === 'US'
+          ? item.name + ', ' + state.getAbbr(item.state)
+          : item.name + ', ' + item.country,
     }));
     setSuggestionsList(suggestions);
     setLoading(false);
@@ -55,36 +55,35 @@ export const SearchAutoComplete = memo(function SearchAutoComplete(props) {
     <>
       <View
         style={[
-          { flex: 1, flexDirection: "row", alignItems: "center" },
-          Platform.select({ ios: { zIndex: 1 } }),
-        ]}
-      >
+          {flex: 1, flexDirection: 'row', alignItems: 'center'},
+          Platform.select({ios: {zIndex: 1}}),
+        ]}>
         <AutocompleteDropdown
           ref={searchRef}
-          controller={(controller) => {
+          controller={controller => {
             dropdownController.current = controller;
           }}
-          direction={Platform.select({ md: "down" })}
-          initialValue={props.saved}
+          direction={Platform.select({md: 'down'})}
           dataSet={suggestionsList}
           onChangeText={getSuggestions}
           clearOnFocus={false}
-          onSelectItem={(item) => {
+          onSelectItem={item => {
             item && props.onSetSelectedItem(item.id, item.title);
           }}
           debounce={600}
-          suggestionsListMaxHeight={Dimensions.get("window").height * 0.4}
+          suggestionsListMaxHeight={Dimensions.get('window').height * 0.4}
           onClear={onClearPress}
           loading={loading}
           useFilter={false} // set false to prevent rerender twice
           textInputProps={{
+            placeholder: props.saved,
             autoCorrect: false,
-            autoCapitalize: "none",
+            autoCapitalize: 'none',
             style: {
               borderRadius: 25,
-              color: "#fff",
+              color: '#fff',
               paddingLeft: 18,
-              fontFamily: "Jomhuria-Regular",
+              fontFamily: 'Jomhuria-Regular',
               fontSize: 24,
               letterSpacing: 7,
             },
@@ -92,26 +91,25 @@ export const SearchAutoComplete = memo(function SearchAutoComplete(props) {
           rightButtonsContainerStyle={{
             right: 8,
             height: 30,
-            alignSelf: "center",
+            alignSelf: 'center',
           }}
           inputContainerStyle={{
-            backgroundColor: "rgba(0,0,0,0.2)",
+            backgroundColor: 'rgba(0,0,0,0.2)',
             borderRadius: 25,
           }}
           suggestionsListContainerStyle={{
-            backgroundColor: "#fff",
+            backgroundColor: '#fff',
           }}
-          containerStyle={{ flexGrow: 1, flexShrink: 1 }}
-          renderItem={(item) => (
+          containerStyle={{flexGrow: 1, flexShrink: 1}}
+          renderItem={item => (
             <Text
               style={{
-                fontFamily: "Jomhuria-Regular",
+                fontFamily: 'Jomhuria-Regular',
                 fontSize: 20,
                 letterSpacing: 4,
-                color: "black",
+                color: 'black',
                 padding: 10,
-              }}
-            >
+              }}>
               {item.title}
             </Text>
           )}

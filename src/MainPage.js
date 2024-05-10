@@ -1,12 +1,10 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, ActivityIndicator } from "react-native";
-import { useEffect, useState, useCallback } from "react";
-import { FetchData } from "./classes/FetchData.js";
-import { VisualData } from "./classes/VisualData.js";
-import WeatherPage from "./WeatherPage.js";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { SearchAutoComplete } from "./SearchBar.js";
-import * as SplashScreen from "expo-splash-screen";
+import {StyleSheet, View, ActivityIndicator} from 'react-native';
+import {useEffect, useState} from 'react';
+import {FetchData} from './classes/FetchData.js';
+import {VisualData} from './classes/VisualData.js';
+import WeatherPage from './WeatherPage.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {SearchAutoComplete} from './SearchBar.js';
 
 export default function MainPage() {
   const [dataLoaded, setDataLoaded] = useState(true);
@@ -15,29 +13,23 @@ export default function MainPage() {
   const [didLoadSave, setDidLoadSave] = useState(false);
 
   const [currentLocation, setCurrentLocation] = useState({
-    coords: "42.3554334 -71.060511",
-    name: "Boston, MA",
+    coords: '42.3554334 -71.060511',
+    name: 'Boston, MA',
   });
 
-  const onLayoutRootView = useCallback(async () => {
-    if (dataLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [dataLoaded]);
-
-  const storeData = async (n_location) => {
+  const storeData = async n_location => {
     try {
       const jsonValue = JSON.stringify(n_location);
-      await AsyncStorage.setItem("location", jsonValue);
+      await AsyncStorage.setItem('location', jsonValue);
     } catch (e) {
-      console.error("Error saving data:", e);
+      console.error('Error saving data:', e);
     }
   };
 
   const getData = async () => {
     try {
       let t_currentLocation;
-      const jsonValue = await AsyncStorage.getItem("location");
+      const jsonValue = await AsyncStorage.getItem('location');
       if (jsonValue !== null) {
         t_currentLocation = JSON.parse(jsonValue);
       } else {
@@ -47,15 +39,15 @@ export default function MainPage() {
       setCurrentLocation(t_currentLocation);
       callFetchData(t_currentLocation.coords, t_currentLocation.name);
     } catch (e) {
-      console.error("Error fetching stored data:", e);
+      console.error('Error fetching stored data:', e);
     }
   };
 
   async function callFetchData(coords, name) {
     setDataLoaded(false);
 
-    if (coords !== "" && name !== "") {
-      const n_location = { coords: coords, name: name };
+    if (coords !== '' && name !== '') {
+      const n_location = {coords: coords, name: name};
       storeData(n_location);
       const fetchData = new FetchData(coords);
 
@@ -72,23 +64,19 @@ export default function MainPage() {
 
   function onPressSearch(coords, name) {
     setDataLoaded(false);
-    if (name !== "" && coords !== "") {
-      setCurrentLocation({ coords: coords, name: name });
+    if (name !== '' && coords !== '') {
+      setCurrentLocation({coords: coords, name: name});
       callFetchData(coords, name);
     }
   }
 
   useEffect(() => {
     if (!didLoadSave) {
-      console.log("call");
+      console.log('call');
       getData();
       setDidLoadSave(true);
     }
   }, [didLoadSave]);
-
-  if (!dataLoaded) {
-    return null;
-  }
 
   return (
     <View
@@ -97,12 +85,10 @@ export default function MainPage() {
           backgroundColor: visuals.theme ? visuals.theme.background : null,
         },
         styles.view,
-      ]}
-      onLayout={onLayoutRootView}
-    >
+      ]}>
       <View style={styles.searchbar}>
         <SearchAutoComplete
-          saved={currentLocation.coords}
+          saved={currentLocation.name}
           onSetSelectedItem={(coords, name) => {
             coords && name && onPressSearch(coords, name);
           }}
@@ -111,7 +97,6 @@ export default function MainPage() {
       <View style={styles.display}>
         <WeatherPage temp={weather.temp} visuals={visuals} />
       </View>
-      <StatusBar />
       {!dataLoaded && (
         <View style={styles.loading}>
           <ActivityIndicator size="large" />
@@ -123,24 +108,24 @@ export default function MainPage() {
 
 const styles = StyleSheet.create({
   view: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
     paddingHorizontal: 20,
   },
   searchbar: {
     flex: 1,
   },
   display: {
-    flex: 4,
+    flex: 8,
   },
   loading: {
-    position: "absolute",
+    position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
     bottom: 0,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0.2)",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.2)',
   },
 });

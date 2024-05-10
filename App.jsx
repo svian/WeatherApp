@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {SearchAutoComplete} from './src/SearchBar.js';
 import {SplashScreen} from './src/SplashScreen';
 
-function App() {
+export default function App() {
   const windowHeight = Dimensions.get('window').height + 50;
   const [weather, setWeather] = useState(typeof FetchData);
   const [visuals, setVisuals] = useState(typeof VisualData);
@@ -147,5 +147,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.2)',
   },
 });
-
-export default App;

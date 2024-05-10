@@ -1,13 +1,13 @@
 import { View, Dimensions } from "react-native";
 import { useCallback } from "react";
 import { useFonts } from "expo-font";
-import MainPage from "./src/MainPage";
+import MainPage from "./src/MainPage.js";
 import { AutocompleteDropdownContextProvider } from "react-native-autocomplete-dropdown";
 import * as SplashScreen from "expo-splash-screen";
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
-    "Jomhuria-Regular": require("../assets/Jomhuria-Regular.ttf"),
+    "Jomhuria-Regular": require("./assets/Jomhuria-Regular.ttf"),
   });
   const windowHeight = Dimensions.get("window").height + 50;
 

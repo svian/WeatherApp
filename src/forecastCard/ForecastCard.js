@@ -15,7 +15,7 @@ export default function ForecastCard(props) {
     <View>
       <View style={[{backgroundColor: props.theme.primary}, styles.upperBox]}>
         <OutlinedText stroke={1} color={props.theme.secondary}>
-          <Text style={styles.text}>Upcoming</Text>
+          <Text style={styles.text}>Upcoming Forecast</Text>
         </OutlinedText>
       </View>
       <View style={styles.box}>

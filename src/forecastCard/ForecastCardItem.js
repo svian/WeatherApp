@@ -37,23 +37,6 @@ export default function ForecastCardItem(props) {
         paddingVertical: 5,
       };
     }
-    // switch (index) {
-    //   case 4:
-    //     return {
-    //       borderBottomStartRadius: 20,
-    //       width: '25%',
-    //       alignItems: 'center',
-    //       backgroundColor: 'rgba(0,0,0,0.2)',
-    //       paddingVertical: 5,
-    //     };
-    //   default:
-    //     return {
-    //       width: '25%',
-    //       alignItems: 'center',
-    //       backgroundColor: 'rgba(0,0,0,0.2)',
-    //       paddingVertical: 5,
-    //     };
-    // }
   }
 
   return (
@@ -61,27 +44,25 @@ export default function ForecastCardItem(props) {
       {props.forecast.map((item, index) => {
         return (
           <View key={index} style={getBorders(index)}>
-            <OutlinedText stroke={1} color={props.theme.secondary}>
-              <Text style={styles.text}>
-                {item.time == 12
-                  ? '12pm'
-                  : item.time > 12
-                  ? `${item.time - 12}pm`
-                  : item.time === '00'
-                  ? '12am'
-                  : `${item.time[1]}am`}
-              </Text>
-            </OutlinedText>
+            <Text style={styles.text}>
+              {item.time == 12
+                ? '12pm'
+                : item.time > 12
+                ? `${item.time - 12}pm`
+                : item.time === '00'
+                ? '12am'
+                : `${item.time[1]}am`}
+            </Text>
             <Image
               style={{
-                height: 60,
+                height: 55,
                 width: 55,
               }}
               source={require('../../assets/icons/simple/CloudyNightSimple.png')}
             />
-            <OutlinedText stroke={1} color={props.theme.secondary}>
+            <View style={{paddingLeft: 10}}>
               <Text style={styles.text}>{item.temp}</Text>
-            </OutlinedText>
+            </View>
           </View>
         );
       })}
@@ -94,6 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     columnGap: 1.5,
     paddingHorizontal: 15,
+    justifyContent: 'center',
   },
   box: {
     width: '25%',

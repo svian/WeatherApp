@@ -63,7 +63,6 @@ export class FetchWeatherData {
 
   fetchForecast() {
     const url = `${POST_URL}data/2.5/forecast?lat=${this.lat}&lon=${this.lon}&cnt=8&appid=${API_KEY}&units=${this.units}`;
-    console.log(url);
     fetch(url)
       .then(response => response.json())
       .then(data => {
@@ -76,7 +75,6 @@ export class FetchWeatherData {
           });
         });
         this.forecast = t_arr;
-        //console.log(this.forecast);
       })
       .catch(error => {
         console.error('Error fetching weather data:', error);

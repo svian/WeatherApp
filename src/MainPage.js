@@ -16,7 +16,6 @@ export default function MainPage(props) {
 
   useEffect(() => {
     if (savedData) {
-      console.log(savedData.units === 'metric');
       setIsMetric(savedData.units === 'metric');
     }
   }, [savedData]);
@@ -53,6 +52,7 @@ export default function MainPage(props) {
             )}
             onValueChange={() => {
               asyncStorage.saveUnits(!isMetric ? 'metric' : 'imperial');
+              props.onChangeUnits(!isMetric ? 'metric' : 'imperial');
               setIsMetric(!isMetric);
             }}
             value={isMetric}

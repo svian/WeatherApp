@@ -22,9 +22,19 @@ export class AsyncSavedData {
     console.log('init');
   }
 
-  getUnits() {
-    return this.units;
-  }
+  getUnits = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('units');
+      if (jsonValue !== null) {
+        console.log(jsonValue);
+        return jsonValue;
+      } else {
+        return DEFAULT_UNITS;
+      }
+    } catch (e) {
+      console.error('Error fetching stored units:', e);
+    }
+  };
 
   saveUnits = async t_units => {
     if (typeof t_units === 'string') {

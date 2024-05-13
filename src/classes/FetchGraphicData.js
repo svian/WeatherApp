@@ -1,36 +1,14 @@
-import {
-  DayClear,
-  DayCloudy,
-  DayFewClouds,
-  DayFogEtc,
-  DayLightRain,
-  DayRainy,
-  DaySnowy,
-  DayThunder,
-  DayLightSnow,
-} from '../themes/DayThemes';
-import {
-  NightClear,
-  NightCloudy,
-  NightFewClouds,
-  NightFogEtc,
-  NightLightRain,
-  NightRainy,
-  NightSnowy,
-  NightThunder,
-  NightLightSnow,
-} from '../themes/NightThemes';
+import * as day from '../themes/DayThemes';
+import * as night from '../themes/NightThemes';
 
-export class VisualData {
-  constructor(time, description) {
-    this.description = description;
-    this.time = time;
+export class FetchGraphicData {
+  constructor(data) {
+    this.description = data.type;
+    this.time = data.time;
     this.category = '';
     this.theme = {
-      background: '#CDE9F1',
-      box: '#CDE9F1',
-      quote: '',
-      quoteSrc: '',
+      primary: '#CDE9F1',
+      secondary: '#CDE9F1',
       img: null,
     };
 
@@ -109,77 +87,77 @@ export class VisualData {
     if (this.time === 'Day') {
       switch (this.category) {
         case 'Clear Skies':
-          this.theme = DayClear;
+          this.theme = day.DayClear;
           break;
 
         case 'Few Clouds':
-          this.theme = DayFewClouds;
+          this.theme = day.DayFewClouds;
           break;
 
         case 'Cloudy':
-          this.theme = DayCloudy;
+          this.theme = day.DayCloudy;
           break;
 
         case 'Light Rain':
-          this.theme = DayLightRain;
+          this.theme = day.DayLightRain;
           break;
 
         case 'Rainy':
-          this.theme = DayRainy;
+          this.theme = day.DayRainy;
           break;
 
         case 'Thunderstorm':
-          this.theme = DayThunder;
+          this.theme = day.DayThunder;
           break;
 
         case 'Snowy':
-          this.theme = DayLightSnow;
+          this.theme = day.DaySnowy;
           break;
 
         case 'Heavy Snow':
-          this.theme = DaySnowy;
+          this.theme = day.DayHeavySnow;
           break;
 
         default:
-          this.theme = DayFogEtc;
+          this.theme = day.DayFogEtc;
           break;
       }
     } else {
       switch (this.category) {
         case 'Clear Skies':
-          this.theme = NightClear;
+          this.theme = night.NightClear;
           break;
 
         case 'Few Clouds':
-          this.theme = NightFewClouds;
+          this.theme = night.NightFewClouds;
           break;
 
         case 'Cloudy':
-          this.theme = NightCloudy;
+          this.theme = night.NightCloudy;
           break;
 
         case 'Light Rain':
-          this.theme = NightLightRain;
+          this.theme = night.NightLightRain;
           break;
 
         case 'Rainy':
-          this.theme = NightRainy;
+          this.theme = night.NightRainy;
           break;
 
         case 'Thunderstorm':
-          this.theme = NightThunder;
+          this.theme = night.NightThunder;
           break;
 
         case 'Snowy':
-          this.theme = NightLightSnow;
+          this.theme = night.NightSnowy;
           break;
 
         case 'Heavy Snow':
-          this.theme = NightSnowy;
+          this.theme = night.NightHeavySnow;
           break;
 
         default:
-          this.theme = NightFogEtc;
+          this.theme = night.NightFogEtc;
           break;
       }
     }

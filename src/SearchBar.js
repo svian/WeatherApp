@@ -80,22 +80,26 @@ export const SearchAutoComplete = memo(function SearchAutoComplete(props) {
             autoCorrect: false,
             autoCapitalize: 'none',
             style: {
-              borderRadius: 25,
               color: '#fff',
               paddingLeft: 18,
               fontFamily: 'Jomhuria-Regular',
-              fontSize: 24,
+              fontSize: 20,
+              position: 'absolute',
+              paddingVertical: 0,
               letterSpacing: 7,
+              width: '100%',
             },
           }}
           rightButtonsContainerStyle={{
             right: 8,
             height: 30,
             alignSelf: 'center',
+            position: 'absolute',
           }}
           inputContainerStyle={{
             backgroundColor: 'rgba(0,0,0,0.2)',
             borderRadius: 25,
+            height: 40,
           }}
           suggestionsListContainerStyle={{
             backgroundColor: '#fff',
@@ -107,15 +111,14 @@ export const SearchAutoComplete = memo(function SearchAutoComplete(props) {
                 fontFamily: 'Jomhuria-Regular',
                 fontSize: 20,
                 letterSpacing: 4,
-                color: 'black',
-                padding: 10,
+                color: 'grey',
               }}>
               {item.title}
             </Text>
           )}
-          inputHeight={50}
+          inputHeight={40}
           showChevron={false}
-          closeOnBlur={false}
+          closeOnBlur={true}
         />
       </View>
     </>

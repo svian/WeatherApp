@@ -26,7 +26,6 @@ export class AsyncSavedData {
     try {
       const jsonValue = await AsyncStorage.getItem('units');
       if (jsonValue !== null) {
-        console.log(jsonValue);
         return jsonValue;
       } else {
         return DEFAULT_UNITS;
@@ -64,7 +63,6 @@ export class AsyncSavedData {
       } else {
         this.units = DEFAULT_UNITS;
       }
-      console.log('got: ' + this.units);
     } catch (e) {
       console.error('Error fetching stored units:', e);
     }
@@ -79,12 +77,9 @@ export class AsyncSavedData {
       } else {
         t_location = DEFAULT_LOCATION_DATA;
       }
-      //FOR TESTING PURPOSES
-      // t_location = DEFAULT_LOCATION_DATA;
 
       this.coords = t_location.coords;
       this.name = t_location.name;
-      console.log('got: ' + this.coords + ' ' + this.name);
     } catch (e) {
       console.error('Error fetching stored location:', e);
     }

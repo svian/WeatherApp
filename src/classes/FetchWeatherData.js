@@ -36,7 +36,6 @@ export class FetchWeatherData {
     this.type = n_type;
     this.temp = n_temp;
 
-    console.log(this.time);
     console.log('Weather is ' + this.temp + ' and ' + this.type);
   }
 

@@ -41,7 +41,6 @@ export default function App() {
   function callFetchData(data) {
     setDataLoading(true);
     if (data.coords !== '' && data.name !== '' && data.units !== '') {
-      console.log('fetch ' + data.units);
       const fetchWeather = new FetchWeatherData(data);
       const fetchForecast = new FetchForecastData(data);
       setTimeout(function () {

@@ -30,7 +30,6 @@ export class FetchForecastData {
 
   fetchForecast() {
     const url = `${POST_URL}data/2.5/forecast?lat=${this.lat}&lon=${this.lon}&cnt=8&appid=${API_KEY}&units=${this.units}`;
-    console.log(url);
 
     fetch(url)
       .then(response => response.json())
@@ -39,11 +38,11 @@ export class FetchForecastData {
         const timezone = data.city.timezone;
         data.list.map(item => {
           const t_time = this.getTimevalues(item.dt, timezone);
-          const tod = t_time >= 6 && t_time <= 18 ? 'Day' : 'Night';
+          // const tod = t_time >= 6 && t_time <= 18 ? 'Day' : 'Night';
           t_arr.push({
             time: t_time,
             temp: `${Math.round(item.main.temp)}°`,
-            icon: this.getIcons(item.weather[0].description, tod),
+            icon: this.getIcons(item.weather[0].description, item.sys.pod),
           });
         });
         this.forecast = t_arr;
@@ -54,7 +53,7 @@ export class FetchForecastData {
   }
 
   getIcons(type, tod) {
-    const t_module = tod === 'Day' ? day_simple : night_simple;
+    const t_module = tod === 'd' ? day_simple : night_simple;
     switch (type) {
       case 'clear sky':
         return t_module.clear;

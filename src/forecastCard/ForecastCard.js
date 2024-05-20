@@ -4,15 +4,14 @@ import {useEffect} from 'react';
 import {OutlinedText} from '../OutlinedText';
 
 export default function ForecastCard(props) {
-  // var forecast = props.weather.forecast;
   var theme = props.theme,
     forecast = props.forecast.forecast;
 
-  //get images
   //split into two groups of 4
   var indexToSplit = 4;
   var first = forecast.slice(0, indexToSplit);
   var second = forecast.slice(indexToSplit);
+
   return (
     <View>
       <View style={[{backgroundColor: theme.primary}, styles.upperBox]}>

@@ -51,7 +51,6 @@ export const Splash = ({isAppReady}) => {
         delay: 1000, // Minimum time the logo will stay visible
         useNativeDriver: true,
       }).start(() => {
-        console.log('hidden');
         setState(HIDDEN);
       });
     }

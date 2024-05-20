@@ -1,5 +1,7 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
-import {OutlinedText} from '../OutlinedText';
+import {Image, StyleSheet, Text, View, Dimensions} from 'react-native';
+
+const windowHeight = Dimensions.get('window').height;
+const FONT_SIZE = windowHeight / 25;
 
 export default function ForecastCardItem(props) {
   function getBorders(index) {
@@ -61,9 +63,9 @@ export default function ForecastCardItem(props) {
           <View key={index} style={getBorders(index)}>
             <Text style={styles.text}>{formatTime(item.time)}</Text>
             <Image
+              resizeMode="contain"
               style={{
-                height: 55,
-                width: 55,
+                height: windowHeight / 10,
               }}
               source={item.icon}
             />
@@ -92,7 +94,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   text: {
-    fontSize: 28,
+    fontSize: FONT_SIZE,
     color: '#FFFFFF',
     fontFamily: 'Jomhuria-Regular',
     letterSpacing: 7,

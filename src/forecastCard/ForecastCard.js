@@ -1,7 +1,10 @@
-import {Text, StyleSheet, View, ImageBackground} from 'react-native';
+import {Text, StyleSheet, View, Dimensions} from 'react-native';
 import ForecastCardItem from './ForecastCardItem';
-import {useEffect} from 'react';
 import {OutlinedText} from '../OutlinedText';
+
+const windowHeight = Dimensions.get('window').height;
+
+const FONT_SIZE = windowHeight / 25;
 
 export default function ForecastCard(props) {
   var theme = props.theme,
@@ -48,14 +51,6 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0, 0, 0, 0.5)',
     textShadowOffset: {height: 2},
     textShadowRadius: 15,
-    fontSize: 26,
-  },
-  title: {
-    fontSize: 75,
-    marginBottom: '-10%',
-  },
-  subtitle: {
-    fontSize: 40,
-    marginBottom: 30,
+    fontSize: FONT_SIZE,
   },
 });

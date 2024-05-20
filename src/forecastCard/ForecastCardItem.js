@@ -7,7 +7,7 @@ export default function ForecastCardItem(props) {
       if (index === 0) {
         return {
           borderBottomStartRadius: 20,
-          width: '25%',
+          width: '30%',
           alignItems: 'center',
           backgroundColor: 'rgba(0,0,0,0.2)',
           paddingVertical: 5,
@@ -15,14 +15,14 @@ export default function ForecastCardItem(props) {
       } else if (index === 3) {
         return {
           borderBottomEndRadius: 20,
-          width: '25%',
+          width: '30%',
           alignItems: 'center',
           backgroundColor: 'rgba(0,0,0,0.2)',
           paddingVertical: 5,
         };
       } else {
         return {
-          width: '25%',
+          width: '30%',
           alignItems: 'center',
           backgroundColor: 'rgba(0,0,0,0.2)',
           paddingTop: 5,
@@ -31,7 +31,7 @@ export default function ForecastCardItem(props) {
       }
     } else {
       return {
-        width: '25%',
+        width: '30%',
         alignItems: 'center',
         backgroundColor: 'rgba(0,0,0,0.2)',
         paddingVertical: 5,
@@ -80,12 +80,13 @@ export default function ForecastCardItem(props) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    columnGap: 1.5,
+    columnGap: 2,
     paddingHorizontal: 15,
     justifyContent: 'center',
+    width: '91%',
   },
   box: {
-    width: '25%',
+    width: '30%',
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,0.2)',
     paddingVertical: 5,

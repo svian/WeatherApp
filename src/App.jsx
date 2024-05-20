@@ -1,5 +1,11 @@
 import {AutocompleteDropdownContextProvider} from 'react-native-autocomplete-dropdown';
-import {ActivityIndicator, Dimensions, StyleSheet, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {useEffect, useState} from 'react';
 import {AsyncSavedData} from './classes/AsyncSavedData';
 import {FetchWeatherData} from './classes/FetchWeatherData';
@@ -75,7 +81,7 @@ export default function App() {
     <SplashScreen isAppReady={!showSplashScreen}>
       <AutocompleteDropdownContextProvider>
         {!showSplashScreen && (
-          <View
+          <ScrollView
             style={{
               minHeight: windowHeight,
               backgroundColor: graphicsData.theme
@@ -109,7 +115,7 @@ export default function App() {
                 <ActivityIndicator size="large" />
               </View>
             )}
-          </View>
+          </ScrollView>
         )}
       </AutocompleteDropdownContextProvider>
     </SplashScreen>
@@ -122,9 +128,9 @@ const styles = StyleSheet.create({
   },
   searchbar: {
     flex: 1,
-    width: '95%',
+    width: '90%',
+    marginVertical: 5,
     alignSelf: 'center',
-    marginVertical: '-2%',
   },
   loading: {
     position: 'absolute',

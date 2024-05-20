@@ -1,31 +1,38 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
 import {OutlinedText} from './OutlinedText';
 
 export default function CurrentWeatherCard(props) {
   var graphics = props.graphics,
     weather = props.weather;
+
+  const windowHeight = Dimensions.get('window').height;
+
+  const TITLE_FONT_SIZE = windowHeight / 9;
+  const SUBTITLE_FONT_SIZE = windowHeight / 17;
+
   return (
-    <View style={styles.container}>
+    <View style={[{backgroundColor: graphics.theme.primary}, styles.box]}>
       {graphics.theme && (
-        <View style={[{backgroundColor: graphics.theme.primary}, styles.box]}>
+        <>
           <Image
+            resizeMode="contain"
             style={{
-              height: 300,
-              width: 340,
-              marginTop: '-5%',
-              marginBottom: '-10%',
+              alignSelf: 'center',
+              marginTop: -20,
+              marginBottom: 10,
+              height: windowHeight / 3,
             }}
             source={graphics.theme.img}
           />
           <View style={{alignItems: 'center'}}>
-            <OutlinedText stroke={1.2} color={graphics.theme.secondary}>
+            <OutlinedText stroke={1} color={graphics.theme.secondary}>
               <Text
                 style={{
-                  fontSize: 70,
+                  fontSize: TITLE_FONT_SIZE,
                   color: '#FFFFFF',
                   fontFamily: 'Jomhuria-Regular',
                   letterSpacing: 7,
-                  marginVertical: -15,
+                  marginVertical: -TITLE_FONT_SIZE,
                 }}>
                 {graphics.category}
               </Text>
@@ -33,31 +40,24 @@ export default function CurrentWeatherCard(props) {
             <OutlinedText stroke={1} color={graphics.theme.secondary}>
               <Text
                 style={{
-                  fontSize: 40,
+                  fontSize: SUBTITLE_FONT_SIZE,
                   color: '#FFFFFF',
                   fontFamily: 'Jomhuria-Regular',
                   letterSpacing: 7,
-                  marginVertical: -15,
                 }}>
                 {`It's ${weather.temp}`}
               </Text>
             </OutlinedText>
           </View>
-        </View>
+        </>
       )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    width: '100%',
-  },
   box: {
     borderRadius: 20,
-    padding: 15,
-    paddingBottom: 30,
     elevation: 5,
     shadowColor: 'rgba(0, 0, 0, 1)',
     height: 'fit-content',

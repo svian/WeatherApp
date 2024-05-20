@@ -72,14 +72,16 @@ export default function MainPage(props) {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    width: '100%',
     height: '100%',
   },
   currentBox: {
+    marginBottom: 10,
+    width: '90%',
     height: 'fit-content',
-    marginBottom: 15,
+    maxHeight: '70%',
   },
   forecastBox: {
     marginBottom: 5,
+    width: '90%',
   },
 });

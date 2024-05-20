@@ -4,7 +4,9 @@ import {useEffect} from 'react';
 import {OutlinedText} from '../OutlinedText';
 
 export default function ForecastCard(props) {
-  var forecast = props.weather.forecast;
+  // var forecast = props.weather.forecast;
+  var theme = props.theme,
+    forecast = props.forecast.forecast;
 
   //get images
   //split into two groups of 4
@@ -13,20 +15,16 @@ export default function ForecastCard(props) {
   var second = forecast.slice(indexToSplit);
   return (
     <View>
-      <View style={[{backgroundColor: props.theme.primary}, styles.upperBox]}>
-        <OutlinedText stroke={1} color={props.theme.secondary}>
+      <View style={[{backgroundColor: theme.primary}, styles.upperBox]}>
+        <OutlinedText stroke={1} color={theme.secondary}>
           <Text style={styles.text}>Upcoming Forecast</Text>
         </OutlinedText>
       </View>
       <View style={styles.box}>
-        <ForecastCardItem theme={props.theme} forecast={first} />
+        <ForecastCardItem forecast={first} />
       </View>
       <View style={styles.box}>
-        <ForecastCardItem
-          theme={props.theme}
-          forecast={second}
-          isLower={true}
-        />
+        <ForecastCardItem forecast={second} isLower={true} />
       </View>
     </View>
   );

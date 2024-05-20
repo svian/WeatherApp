@@ -9,6 +9,7 @@ const GREY = 'rgba(0,0,0,0.2)';
 export default function MainPage(props) {
   var weather = props.weather,
     graphics = props.graphics,
+    forecast = props.forecast,
     asyncStorage = props.asyncStorage,
     savedData = props.savedData;
 
@@ -28,7 +29,7 @@ export default function MainPage(props) {
             <CurrentWeatherCard weather={weather} graphics={graphics} />
           </View>
           <View style={styles.forecastBox}>
-            <ForecastCard theme={graphics.theme} weather={weather} />
+            <ForecastCard theme={graphics.theme} forecast={forecast} />
           </View>
           <Switch
             backgroundActive={GREY}

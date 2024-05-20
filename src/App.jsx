@@ -7,6 +7,7 @@ import {FetchGraphicData} from './classes/FetchGraphicData';
 import {SplashScreen} from './SplashScreen';
 import MainPage from './MainPage';
 import {SearchAutoComplete} from './SearchBar';
+import {FetchForecastData} from './classes/FetchForecastData';
 
 export default function App() {
   const windowHeight = Dimensions.get('window').height + 50;
@@ -19,6 +20,7 @@ export default function App() {
   const [savedData, setSavedData] = useState(typeof AsyncSavedData);
   const [weatherData, setWeatherData] = useState(typeof FetchWeatherData);
   const [graphicsData, setGraphicsData] = useState(typeof FetchGraphicData);
+  const [forecastData, setForecastData] = useState(typeof FetchForecastData);
 
   function onPressSearch(t_coords, t_name) {
     let t_data = {coords: t_coords, name: t_name, units: savedData.units};
@@ -41,12 +43,14 @@ export default function App() {
     if (data.coords !== '' && data.name !== '' && data.units !== '') {
       console.log('fetch ' + data.units);
       const fetchWeather = new FetchWeatherData(data);
-
+      const fetchForecast = new FetchForecastData(data);
       setTimeout(function () {
         const fetchGraphics = new FetchGraphicData(fetchWeather);
 
         setGraphicsData(fetchGraphics);
         setWeatherData(fetchWeather);
+        setForecastData(fetchForecast);
+
         setDataLoading(false);
         if (showSplashScreen) {
           setShowSplashScreen(false);
@@ -93,6 +97,7 @@ export default function App() {
                   <MainPage
                     weather={weatherData}
                     graphics={graphicsData}
+                    forecast={forecastData}
                     asyncStorage={asyncStorage}
                     savedData={savedData}
                     onChangeUnits={e => handleChangeUnits(e)}

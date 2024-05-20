@@ -11,7 +11,6 @@ export class FetchWeatherData {
     this.temp = '';
     this.time = '';
     this.units = data.units;
-    this.forecast = [{time: '', temp: '', type: ''}];
 
     this.getWeatherValues(data.coords);
   }
@@ -22,7 +21,6 @@ export class FetchWeatherData {
     this.lon = t_coords[1];
 
     this.fetchWeather();
-    this.fetchForecast();
   }
 
   setTypeandTemp(n_type, n_temp, n_unix, n_sunrise, n_sunset) {
@@ -55,26 +53,6 @@ export class FetchWeatherData {
           data.sys.sunrise,
           data.sys.sunset,
         );
-      })
-      .catch(error => {
-        console.error('Error fetching weather data:', error);
-      });
-  }
-
-  fetchForecast() {
-    const url = `${POST_URL}data/2.5/forecast?lat=${this.lat}&lon=${this.lon}&cnt=8&appid=${API_KEY}&units=${this.units}`;
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        let t_arr = [];
-        data.list.map(item => {
-          t_arr.push({
-            time: item.dt_txt.substr(11, 2),
-            temp: `${Math.round(item.main.temp)}°`,
-            type: item.weather[0].description,
-          });
-        });
-        this.forecast = t_arr;
       })
       .catch(error => {
         console.error('Error fetching weather data:', error);

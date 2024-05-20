@@ -39,26 +39,33 @@ export default function ForecastCardItem(props) {
     }
   }
 
+  function formatTime(time) {
+    if (time == 0) {
+      return '12am';
+    } else {
+      if (time < 12) {
+        if (time[0] == 0) {
+          return `${time[1]}am`;
+        }
+        return `${time}am`;
+      } else {
+        return `${time - 12}pm`;
+      }
+    }
+  }
+
   return (
     <View style={styles.container}>
       {props.forecast.map((item, index) => {
         return (
           <View key={index} style={getBorders(index)}>
-            <Text style={styles.text}>
-              {item.time == 12
-                ? '12pm'
-                : item.time > 12
-                ? `${item.time - 12}pm`
-                : item.time === '00'
-                ? '12am'
-                : `${item.time[1]}am`}
-            </Text>
+            <Text style={styles.text}>{formatTime(item.time)}</Text>
             <Image
               style={{
                 height: 55,
                 width: 55,
               }}
-              source={require('../../assets/icons/simple/CloudyNightSimple.png')}
+              source={item.icon}
             />
             <View style={{paddingLeft: 10}}>
               <Text style={styles.text}>{item.temp}</Text>
